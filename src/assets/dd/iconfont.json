@@ -1,0 +1,30 @@
+{
+  "id": "4406821",
+  "name": "dd",
+  "font_family": "iconfont",
+  "css_prefix_text": "dd-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "35701056",
+      "name": "需求",
+      "font_class": "xuqiu",
+      "unicode": "eb87",
+      "unicode_decimal": 60295
+    },
+    {
+      "icon_id": "658017",
+      "name": "个人",
+      "font_class": "geren",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
+      "icon_id": "3904406",
+      "name": "八卦",
+      "font_class": "bagua",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    }
+  ]
+}

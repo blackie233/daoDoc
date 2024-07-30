@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4406821 */
+  src: url('iconfont.woff2') format('woff2'),
+       url('iconfont.woff') format('woff'),
+       url('iconfont.ttf') format('truetype');
+}
+
+.dd {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dd-xuqiu:before {
+  content: "\eb87";
+}
+
+.dd-geren:before {
+  content: "\e657";
+}
+
+.dd-bagua:before {
+  content: "\e603";
+}
+
