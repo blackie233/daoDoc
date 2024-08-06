@@ -1,5 +1,20 @@
 .container {
   background-color: #E0D0C2;
   height: 100%;
-
+  padding: 20px;
+  .at-search-bar {
+    background-color: transparent;
+    padding: 0;
+  }
+  .hexagrams-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 700px;
+    width: 100%;
+    > * {
+      width: 20%;
+      margin-top: 40px;
+    }
+  }
 }

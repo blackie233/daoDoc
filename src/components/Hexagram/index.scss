@@ -1,0 +1,21 @@
+.hexagram-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .shape {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    > * {
+      margin-bottom: 4px;
+      &:nth-last-child(1) {
+        margin: 0;
+      }
+    }
+  }
+  .text {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 4px;
+  }
+}
