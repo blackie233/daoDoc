@@ -6,4 +6,7 @@
 .line-wrapper {
   display: flex;
   flex: 1;
+  .line:nth-child(1) {
+    margin-right: 4px;
+  }
 }

@@ -7,7 +7,7 @@ export function Line(props) {
     return props.type == 1 ?
         <View className="line"></View> :
         <View className="line-wrapper">
-            <View className="line" style='margin-right: 4px'></View>
+            <View className="line"></View>
             <View className="line"></View>
         </View>
     // return <CustomWrapper>

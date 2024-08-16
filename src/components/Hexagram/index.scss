@@ -1,4 +1,4 @@
-.hexagram-wrapper {
+.hexagram-content {
   display: flex;
   flex-direction: column;
 
@@ -6,7 +6,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    > * {
+    >.line-wrapper,>.line {
       margin-bottom: 4px;
       &:nth-last-child(1) {
         margin: 0;
@@ -14,8 +14,8 @@
     }
   }
   .text {
-    font-size: 16px;
+    font-size: 16PX;
     text-align: center;
-    margin-top: 4px;
+    //margin-top: 4px;
   }
 }

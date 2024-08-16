@@ -3,3 +3,4 @@
 /.idea
 /__tests__
 /yarn.lock
+/dist

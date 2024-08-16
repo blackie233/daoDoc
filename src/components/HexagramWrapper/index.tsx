@@ -5,8 +5,10 @@ import "./index.scss"
 export function TrigramWrapper(prop:IHexagramIn) {
 
     return (
-        <View className='hexagram-wrapper'>
-            { prop.hexagrams && <Hexagram hexagrams={prop.hexagrams } > { prop.text } </Hexagram> }
+        <View onClick={prop.onClick} className='hexagram-wrapper'>
+            { prop.hexagrams &&
+                <Hexagram hexagrams={prop.hexagrams } > { prop.text } </Hexagram>
+            }
         </View>
     )
 }

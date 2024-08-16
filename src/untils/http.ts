@@ -1,91 +1,81 @@
-import axios from "axios";
+// import axios from "axios";
 
-const baseUrl = 'http://54.159.42.67:8889'
+// 可以根据不同环境配置 baseURL
+import Taro from "@tarojs/taro";
 
-const http = axios.create({
-    // baseURL: process.env.TARO_APP_API,  // 你的API地址
-    baseURL: baseUrl,
-    timeout: 10000,  // 请求超时时间
-    headers: {
-        'Content-Type': 'application/json',  // 设置默认的Content-Type
+// const baseUrl = 'http://192.168.1.20:8889';
+
+class Http {
+    private baseUrl: string;
+    private defaultHeaders: Record<string, string>;
+
+    constructor(baseUrl: string) {
+        this.baseUrl = baseUrl;
+        this.defaultHeaders = {
+            'Content-Type': 'application/json',
+        };
     }
-});
 
-// 请求拦截器
-http.interceptors.request.use(
-    config => {
-        // 在发送请求之前做些什么：例如添加token
-        // config.headers['Authorization'] = '你的token';
+    // 请求拦截器
+    private requestInterceptor(config: Taro.request.Option): Taro.request.Option {
+        // 在发送请求之前做些什么，比如添加 token
+        // config.header['Authorization'] = 'Bearer token';
         return config;
-    },
-    error => {
-        // 对请求错误做些什么
-        return Promise.reject(error);
     }
-);
 
-// 响应拦截器
-http.interceptors.response.use(
-    response => {
+    // 响应拦截器
+    private responseInterceptor(response: Taro.request.SuccessCallbackResult<any>): any {
         // 对响应数据做点什么
-        const res = response.data;
-        // 根据你的业务处理回调
-        if (res.code !== 200) {
-            // 处理错误
-            // ...
-            return Promise.reject(new Error(res.message || 'Error'));
-        } else {
-            return res;
-        }
-    },
-    error => {
-        // 对响应错误做点什么
-        console.log('err' + error);  // for debug
-        return Promise.reject(error);
-    }
-);
-
-/**
- * 封装get方法
- * @param url  请求url
- * @param params  请求参数
- * @returns {Promise}
- */
-export const get = (url, params = {}) => {
-    return new Promise((resolve, reject) => {
-        http.get(url, {
-            params: params,
-        }).then((response) => {
-            // landing(url, params, response.data);
-            resolve(response.data);
-        })
-            .catch((error) => {
-                reject(error);
+        if (response.statusCode !== 200 || !response.data.success) {
+            // 根据需要处理错误
+            Taro.showToast({
+                title: response.data.message || '请求失败',
+                icon: 'none',
             });
-    });
+            return Promise.reject(response);
+        }
+        return response.data.data;
+    }
+
+    // GET 请求封装
+    public get(url: string, params: Record<string, any> = {}): Promise<any> {
+        const config: Taro.request.Option = {
+            url: `${this.baseUrl}${url}`,
+            method: 'GET',
+            header: this.defaultHeaders,
+            data: params,
+        };
+        return this.request(config);
+    }
+
+    // POST 请求封装
+    public post(url: string, data: Record<string, any> = {}): Promise<any> {
+        const config: Taro.request.Option = {
+            url: `${this.baseUrl}${url}`,
+            method: 'POST',
+            header: this.defaultHeaders,
+            data: data,
+        };
+        return this.request(config);
+    }
+
+    // 统一的请求方法
+    private request(config: Taro.request.Option): Promise<any> {
+        config = this.requestInterceptor(config);
+        return Taro.request(config)
+            .then(this.responseInterceptor)
+            .catch((error) => {
+                // 处理请求或响应错误
+                Taro.showToast({
+                    title: error.message || '请求出错',
+                    icon: 'none',
+                });
+                return Promise.reject(error);
+            });
+    }
 }
 
-/**
- * 封装post请求
- * @param url
- * @param data
- * @returns {Promise}
- */
+// 使用示例
+const http = new Http('http://192.168.1.20:8889');
 
-export const post = (url, data) => {
-    return new Promise((resolve, reject) => {
-        console.log(url)
-        url = url.startsWith('http') ? url : baseUrl + url
-        http.post(url, data).then(
-            (response) => {
-                //关闭进度条
-                resolve(response.data);
-            },
-            (err) => {
-                reject(err);
-            }
-        );
-    });
-}
-
-// export default http;
+export default http;

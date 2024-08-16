@@ -1,16 +1,20 @@
-import {post} from "@/untils/http";
+import http from "@/untils/http";
 
-export class DivinatoryService {
+class DivinatoryService {
 
     async load() {
-        let resp = await post('/divinatory/load', {})
+        let resp:any = await http.post('/divinatory/load', {})
         console.log(resp)
+        return resp.items
     }
 
     async readPure() {
-        let resp:any = await post('/divinatory/readPure', {})
+        let resp:any = await http.post('/divinatory/readPure', {})
         console.log(resp)
-        return resp.result.items
+        return resp.items
     }
-
 }
+
+const service = new DivinatoryService()
+
+export default service

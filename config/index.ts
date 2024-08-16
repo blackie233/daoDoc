@@ -9,6 +9,13 @@ export default defineConfig(async (merge, { command, mode }) => {
   const baseConfig: UserConfigExport = {
     projectName: 'taro',
     date: '2024-1-21',
+    // designWidth: 375,
+    // deviceRatio: {
+    //   640: 0.81 / 2,
+    //   750: 1 / 2,
+    //   375: 1,
+    //   828: 1.5 / 2
+    // },
     designWidth: 750,
     deviceRatio: {
       640: 2.34 / 2,

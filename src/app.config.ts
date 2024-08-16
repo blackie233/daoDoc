@@ -1,7 +1,8 @@
 export default defineAppConfig({
   pages: [
-    'pages/index/index',
-      'pages/home/index',
+    'pages/index',
+    // 'pages/home/index',
+    // 'pages/detail/index',
 
   ],
   window: {

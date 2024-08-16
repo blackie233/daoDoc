@@ -1,6 +1,7 @@
 @import "~taro-ui/dist/style/components/tab-bar.scss";
 @import "~taro-ui/dist/style/components/badge.scss";
 
-.home-container{
-  background-color: #E0D0C2;
+.container{
+  display: flex;
+  flex-direction: column;
 }

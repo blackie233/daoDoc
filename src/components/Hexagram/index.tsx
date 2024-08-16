@@ -27,7 +27,7 @@ export function Hexagram(props: IHexagramIn) {
 
     return (
         <View style={{ width: props.width || '', height: props.height || '100%' }}
-              className='hexagram-wrapper'>
+              className='hexagram-content'>
             <View className='shape'>
                 { lines.map( (item, index) =>
                     <Line key={index} type={ item } />

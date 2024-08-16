@@ -3,8 +3,9 @@ import {View} from '@tarojs/components'
 import { AtTabBar} from "taro-ui";
 import './index.scss'
 import {Component} from "react";
-import {BrowserRouter, Route, Routes,} from "react-router-dom";
-import {Home} from "@/pages/home";
+import {BrowserRouter, HashRouter, Route, Routes,} from "react-router-dom";
+import Home from "@/pages/home";
+import Detail from "@/pages/detail";
 
 
 class Index extends Component<any, any> {
@@ -39,35 +40,26 @@ class Index extends Component<any, any> {
         console.log(e)
     }
 
+    onShareAppMessage() {
+        return {
+            title: '分享标题',
+            path: '/pages/index/index'
+        };
+    }
+
+
     render() {
+        const MyRouter = process.env.TARO_ENV === 'h5' ? HashRouter : BrowserRouter
+
         return (
-            <BrowserRouter >
+            <MyRouter basename="/pages/index">
                 <View className='container'>
                     <Routes>
-                        {/*<Route path="pages/index/index" element={<Index />}>*/}
-                        <Route index  element={<Home />}></Route>
-                        {/*<Route path="pages/index/index"  element={<Home />}></Route>*/}
-                        {/*<Route index  element={<Home />}></Route>*/}
-                        {/*</Route>*/}
+                        <Route index element={<Home />}></Route>
+                        <Route path="detail" element={<Detail />}></Route>
                     </Routes>
-                    { this.props.children }
-                    {/*<PageMeta*/}
-                    {/*    onScroll={this.handleScroll}*/}
-                    {/*>*/}
-                    {/*    <NavigationBar>*/}
+                    {/*{ this.props.children }*/}
 
-                    {/*    </NavigationBar>*/}
-                    {/*</PageMeta>*/}
-                    {/*<AtSearchBar*/}
-                    {/*    actionName= '搜索'*/}
-                    {/*    value={""}*/}
-                    {/*    onChange={() => {*/}
-                    {/*    }}>*/}
-                    {/*</AtSearchBar>*/}
-
-                    {/*<View>*/}
-                    {/*    <Link to="/pages/home">首页</Link>*/}
-                    {/*</View>*/}
 
                     <AtTabBar fixed
                               selectedColor="#d43c33"
@@ -80,7 +72,7 @@ class Index extends Component<any, any> {
                     </AtTabBar>
                 </View>
 
-            </BrowserRouter>
+            </MyRouter>
         )
     }
 }
